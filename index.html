@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kindertrödelmarkt Anmeldung</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    input, label, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .preis {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Kindertrödelmarkt Anmeldung</h1>
+  <form action="https://formsubmit.co/dressebay@gmail.com" method="POST" oninput="updatePrice()">
+    <input type="hidden" name="_subject" value="Neue Anmeldung Kindertrödelmarkt">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="box">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="Name" required>
+
+    <label for="email">E-Mail:</label>
+    <input type="email" id="email" name="Email" required>
+
+    <label for="meter">Anzahl Meter (10 €/m):</label>
+    <input type="number" id="meter" name="Meter" value="1" min="1" required>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="tisch" name="Tisch_mieten" onchange="updatePrice()">
+      <label for="tisch">Tisch für 10 € mieten</label>
+    </div>
+
+    <div class="preis" id="gesamtpreis">Gesamtpreis: 10 €</div>
+
+    <button type="submit">Anmeldung abschicken</button>
+  </form>
+
+  <script>
+    function updatePrice() {
+      const meter = parseInt(document.getElementById('meter').value || '1');
+      const tisch = document.getElementById('tisch').checked;
+      const preis = meter * 10 + (tisch ? 10 : 0);
+      document.getElementById('gesamtpreis').textContent = 'Gesamtpreis: ' + preis + ' €';
+    }
+    updatePrice();
+  </script>
+</body>
+</html>
